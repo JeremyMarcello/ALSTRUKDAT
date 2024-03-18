@@ -29,7 +29,7 @@ int main(){
     for (int x = 0; x < 2; x++){
         for (int y = 0; y < 3; y++){
             for (int z = 0; z < 3; z++){
-                cout << arr[x][y][z] << endl;
+                cout << arr[x][y][z] << ends;
             }
             cout << endl;
         }
