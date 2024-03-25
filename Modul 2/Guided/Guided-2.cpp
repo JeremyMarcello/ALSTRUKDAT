@@ -3,7 +3,7 @@ using namespace std;
 
 int main(){
     int maks, a, i = 1, lokasi;
-    cout << "Mauskkan panjang array : ";
+    cout << "Masukkan panjang array : ";
     cin >> a;
     int array[a];
     cout << "Masukkan " << a << " angka\n";
