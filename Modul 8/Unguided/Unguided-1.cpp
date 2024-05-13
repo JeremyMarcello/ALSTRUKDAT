@@ -2,8 +2,6 @@
 #include <string>
 using namespace std;
 
-const int maksimalQueue = 5; // Maksimal Antrian
-
 struct Node {
     string data;
     Node* next;
@@ -51,7 +49,7 @@ void dequeueAntrian() { // Fungsi Mengurangi Antrian
 }
 
 int countQueue() { // Fungsi Menghitung Banyak Antrian
-    int count;
+    int count = 0;
     Node* cur = front;
     while (cur != NULL) {
         count++;

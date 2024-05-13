@@ -2,10 +2,13 @@
 #include <string>
 using namespace std;
 
-const int maksimalQueue = 5; // Maksimal Antrian
+struct mahasiswa {
+  string nama;
+  string nim;
+};
 
 struct Node {
-    string data;
+    mahasiswa data;
     Node* next;
 };
 
@@ -25,7 +28,7 @@ bool isEmpty() { // Pengecekan Antrian Sudah Kosong Atau Tidak
     }
 }
 
-void enqueueAntrian(string data) { // Fungsi Menambahkan Antrian
+void enqueueAntrian(mahasiswa data) { // Fungsi Menambahkan Antrian
     Node* newNode = new Node;
     newNode->data = data;
     newNode->next = NULL;
@@ -51,7 +54,7 @@ void dequeueAntrian() { // Fungsi Mengurangi Antrian
 }
 
 int countQueue() { // Fungsi Menghitung Banyak Antrian
-    int count;
+    int count = 0;
     Node* cur = front;
     while (cur != NULL) {
         count++;
@@ -80,7 +83,7 @@ void viewQueue() {
   Node* cur = front;
   int n = 1;
   while (cur != NULL) {
-    cout << n << ". " << cur->data << endl;
+    cout << n << ". " << "Nama : " << cur->data.nama << ", NIM : " << cur->data.nim << endl;
     cur = cur->next;
     n++;
   }
@@ -89,8 +92,8 @@ void viewQueue() {
 
 
 int main() {
-    enqueueAntrian("Andi");
-    enqueueAntrian("Maya");
+    enqueueAntrian({"Andi", "2311110069"});
+    enqueueAntrian({"Maya", "2311110099"});
     
     viewQueue();
     cout << "Jumlah Antrian = " << countQueue() << endl;
