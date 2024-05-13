@@ -3,19 +3,18 @@
 using namespace std;
 
 const int maksimalQueue = 5; // Maksimal Antrian
-
-struct Node {
-    string data;
-    Node* next;
-};
-
-Node* front = NULL;
-Node* back = NULL;
+int front = 0; // Penanda Depan Antrian
+int back = 0; // Penanda Belakang Antrian
+string queueTeller[5]; // Deklarasi Antrian Teller
 
 bool isFull() { // Pengecekan Antrian Sudah Penuh Atau Tidak
-    // Tidak ada batas maksimal
-    return false;
+    if (back == maksimalQueue) {
+        return true; // = 1
+    } else {
+        return false;
+    }
 }
+
 
 bool isEmpty() { // Pengecekan Antrian Sudah Kosong Atau Tidak
     if (back == 0) {
@@ -26,14 +25,17 @@ bool isEmpty() { // Pengecekan Antrian Sudah Kosong Atau Tidak
 }
 
 void enqueueAntrian(string data) { // Fungsi Menambahkan Antrian
-    Node* newNode = new Node;
-    newNode->data = data;
-    newNode->next = NULL;
-    if (isEmpty()) {
-            front = back = newNode;
+    if (isFull()) {
+        cout << "Antrian Sudah Penuh" << endl;
     } else {
-            back->next = newNode;
-            back = newNode;
+        if (isEmpty()) {
+            queueTeller[0] = data;
+            front++;
+            back++;
+        } else {
+            queueTeller[back] = data;
+            back++;
+        }
     }
 }
 
@@ -41,52 +43,39 @@ void dequeueAntrian() { // Fungsi Mengurangi Antrian
     if (isEmpty()) {
         cout << "Antrian Kosong" << endl;
     } else {
-        Node* temp = front;
-        front = front->next;
-        delete temp;
-        if (front == NULL) {
-            back = NULL;
+        for (int i = 0; i < back; i++) {
+            queueTeller[i] = queueTeller[i + 1];
         }
+        back--;
     }
 }
 
 int countQueue() { // Fungsi Menghitung Banyak Antrian
-    int count;
-    Node* cur = front;
-    while (cur != NULL) {
-        count++;
-        cur = cur->next;
-    }
-    return count;
+    return back;
 }
 
 void clearQueue() { // Fungsi Menghapus Antrian
     if (isEmpty()) {
         cout << "Antrian Kosong" << endl;
     } else {
-        while (front != NULL) {
-            dequeueAntrian();
+        for (int i = 0; i < back; i++) {
+            queueTeller[i] = "";
         }
+        front = 0;
+        back = 0;
     }
 }
 
-void viewQueue() {
-  if (isEmpty()) {
-    cout << "Antrian Kosong" << endl;
-    return;
-  }
-
-  cout << "Data Antrian Teller :" << endl;
-  Node* cur = front;
-  int n = 1;
-  while (cur != NULL) {
-    cout << n << ". " << cur->data << endl;
-    cur = cur->next;
-    n++;
-  }
-  cout << endl;
+void viewQueue() { // Fungsi Melihat Antrian
+    cout << "Data Antrian Teller :" << endl;
+    for (int i = 0; i < maksimalQueue; i++) {
+        if (queueTeller[i] != "") {
+            cout << i + 1 << ". " << queueTeller[i] << endl;
+        } else {
+            cout << i + 1 << ". (Kosong)" << endl;
+        }
+    }
 }
-
 
 int main() {
     enqueueAntrian("Andi");
