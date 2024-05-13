@@ -2,14 +2,6 @@
 
 <p align="center">Jeremy Marcello Waani / 2311110003 / S1SD04-A</p>
 
-## Features
-
-- [Dasar Teori](#dasar-teori)
-- [Guided](#guided)
-- [Unguided](#unguided)
-- [Kesimpulan](#kesimpulan)
-- [Referensi](#referensi)
-
 ## Dasar Teori
 
 ### 1. Pengertian Queue
@@ -130,56 +122,55 @@ int main() {
 **Output:**
 ![8G1](https://github.com/JeremyMarcello/Assignment-Praktikum-Algoritma-dan-Struktur-Data/assets/156126843/855264f2-5105-4913-8685-b5f546bdfa04)
 
-### Interpretasi:
-
-Kodingan ini mengimplementasikan antrian (queue) untuk mengatur antrian teller di bank.
+**Kode yang diberikan mengimplementasikan sistem antrian untuk mengatur antrian teller di bank. Berikut interpretasi detailnya:**
 
 **Struktur Data:**
 
-* **queueTeller:** Array of string dengan ukuran `maksimalQueue` (5) untuk menyimpan data nasabah yang sedang mengantri di teller bank.
-* **front:** Variabel integer untuk menunjuk ke indeks elemen terdepan dalam antrian (awalnya 0).
-* **back:** Variabel integer untuk menunjuk ke indeks elemen belakang dalam antrian (awalnya 0).
+* queueTeller: Array string dengan ukuran maksimalQueue (5) untuk menyimpan data nasabah yang sedang mengantri di teller bank.
+* front: Variabel integer untuk menunjuk ke indeks elemen terdepan dalam antrian (awalnya 0).
+* back: Variabel integer untuk menunjuk ke indeks elemen belakang dalam antrian (awalnya 0).
 
 **Fungsi:**
 
-* **isFull():** Memeriksa apakah antrian penuh dengan mengembalikan `true` jika `back` sama dengan `maksimalQueue` dan `false` sebaliknya.
-* **isEmpty():** Memeriksa apakah antrian kosong dengan mengembalikan `true` jika `back` sama dengan 0 dan `false` sebaliknya.
-* **enqueueAntrian(data):** Menambahkan data nasabah baru ke antrian.
+* isFull(): Memeriksa apakah antrian penuh dengan mengembalikan true jika back sama dengan maksimalQueue dan false sebaliknya.
+* isEmpty(): Memeriksa apakah antrian kosong dengan mengembalikan true jika back sama dengan 0 dan false sebaliknya.
+* enqueueAntrian(data): Menambahkan data nasabah baru ke antrian.
     * Memeriksa apakah antrian penuh.
-    * Jika tidak penuh:
-        * Jika antrian kosong (back == 0), tambahkan data ke indeks 0 pada array `queueTeller` dan update `front` dan `back` ke 1.
-        * Jika tidak kosong, tambahkan data ke indeks `back` pada array `queueTeller` dan update `back` ditambah 1.
-    * Jika penuh, tampilkan pesan "Antrian Penuh".
-* **dequeueAntrian():** Menghapus data nasabah terdepan dari antrian.
+        * Jika penuh, tampilkan pesan "Antrian Penuh".
+        * Jika tidak penuh:
+            * Jika antrian kosong (back == 0), tambahkan data ke indeks 0 pada array queueTeller dan update front dan back ke 1.
+            * Jika tidak kosong, tambahkan data ke indeks back pada array queueTeller dan update back ditambahan 1.
+* dequeueAntrian(): Menghapus data nasabah terdepan dari antrian.
     * Memeriksa apakah antrian kosong.
-    * Jika tidak kosong, lakukan loop untuk memindahkan elemen antrian ke indeks sebelumnya (geser ke depan) hingga indeks terakhir.
-    * Kurangi nilai `back` untuk menunjukkan elemen terakhir yang baru.
-    * Jika kosong, tampilkan pesan "Antrian kosong".
-* **countQueue():** Menghitung jumlah data nasabah yang sedang mengantri.
-    * Mengembalikan nilai `back`, yang menunjukkan indeks elemen terakhir dalam antrian ditambah 1 (jumlah elemen).
-* **clearQueue():** Menghapus semua data nasabah dari antrian.
+        * Jika kosong, tampilkan pesan "Antrian kosong".
+        * Jika tidak kosong, lakukan loop untuk memindahkan elemen antrian ke indeks sebelumnya (geser ke depan) hingga indeks terakhir.
+        * Kurangi nilai back untuk menunjukkan elemen terakhir yang baru.
+* countQueue(): Menghitung jumlah data nasabah yang sedang mengantri.
+    * Mengembalikan nilai back, yang menunjukkan indeks elemen terakhir dalam antrian ditambah 1 (jumlah elemen).
+* clearQueue(): Menghapus semua data nasabah dari antrian.
     * Memeriksa apakah antrian kosong.
-    * Jika tidak kosong, loop untuk mengisi semua elemen dalam array `queueTeller` dengan string kosong.
-    * Update `back` dan `front` ke 0 untuk mereset antrian.
-* **viewQueue():** Menampilkan data nasabah yang sedang mengantri.
+        * Jika kosong, tampilkan pesan "Antrian kosong".
+        * Jika tidak kosong, loop untuk mengisi semua elemen dalam array queueTeller dengan string kosong.
+        * Update back dan front ke 0 untuk mereset antrian.
+* viewQueue(): Menampilkan data nasabah yang sedang mengantri.
     * Cetak judul "Data antrian teller".
-    * Loop melalui seluruh elemen `queueTeller`.
-    * Jika elemen tidak kosong, cetak data nasabah dengan format "[nomor urut]. [nama nasabah]".
-    * Jika elemen kosong, cetak "[nomor urut]. (kosong)" untuk menandakan posisi kosong dalam antrian.
+    * Loop melalui seluruh elemen queueTeller.
+        * Jika elemen tidak kosong, cetak data nasabah dengan format "[nomor urut]. [nama nasabah]".
+        * Jika elemen kosong, cetak "[nomor urut]. (kosong)" untuk menandakan posisi kosong dalam antrian.
 
 **Fungsi Utama (main):**
 
-* Memasukkan data nasabah "Andi" dan "Maya" ke dalam antrian menggunakan `enqueueAntrian`.
-* Menampilkan data antrian menggunakan `viewQueue`.
-* Menampilkan jumlah antrian menggunakan `countQueue`.
-* Menghapus data nasabah terdepan dari antrian menggunakan `dequeueAntrian`.
+* Memasukkan data nasabah "Andi" dan "Maya" ke dalam antrian * menggunakan enqueueAntrian.
+* Menampilkan data antrian menggunakan viewQueue.
+* Menampilkan jumlah antrian menggunakan countQueue.
+* Menghapus data nasabah terdepan dari antrian menggunakan dequeueAntrian.
 * Menampilkan data antrian dan jumlah antrian setelah penghapusan.
-* Menghapus semua data nasabah dari antrian menggunakan `clearQueue`.
+* Menghapus semua data nasabah dari antrian menggunakan clearQueue.
 * Menampilkan data antrian dan jumlah antrian setelah penghapusan semua data (antrian kosong).
 
-**Kesimpulan:**
+Kesimpulan:
 
-Kodingan ini mensimulasikan antrian teller bank menggunakan konsep antrian (queue). Fungsi-fungsi yang disediakan memungkinkan operasi dasar untuk mengelola antrian, seperti menambahkan data nasabah baru, menghapus data nasabah terdepan, melihat data antrian, menghitung jumlah antrian, dan menghapus semua data antrian.
+Kode ini mensimulasikan antrian teller bank menggunakan konsep antrian (queue). Fungsi-fungsi yang disediakan dapat mempermudah untuk menambahkan, mengurangi, melihat jumlah antrian.
 
 ## Unguided
 
@@ -297,65 +288,56 @@ int main() {
 
 ![8U1](https://github.com/JeremyMarcello/Assignment-Praktikum-Algoritma-dan-Struktur-Data/assets/156126843/ceb33183-0b3e-4a46-a013-05d77a97f5a6)
 
-**Kodingan ini mengimplementasikan antrian (queue) menggunakan linked list untuk mengatur antrian teller di bank.**
+**Kode ini juga mengimplementasikan antrian (queue) untuk mengatur antrian teller di bank, namun menggunakan struktur data linked list. Berikut interpretasi detailnya:**
 
 **Struktur Data:**
 
-* **Node:** Struktur data yang digunakan untuk membangun linked list.
-    * **data:** Variabel string untuk menyimpan data nasabah yang sedang mengantri.
-    * **next:** Pointer yang menunjuk ke Node berikutnya dalam linked list.
-* **front:** Pointer yang menunjuk ke Node terdepan (awal) dalam antrian (awalnya NULL).
-* **back:** Pointer yang menunjuk ke Node terbelakang (akhir) dalam antrian (awalnya NULL).
+* Node: Struktur untuk menyimpan data nasabah (data) dan pointer ke node selanjutnya (next).
+* front: Pointer yang menunjuk ke node terdepan dalam antrian (awalnya NULL).
+* back: Pointer yang menunjuk ke node belakang dalam antrian (awalnya NULL).
 
 **Fungsi:**
 
-* **isEmpty():** Memeriksa apakah antrian kosong dengan mengembalikan `true` jika `front` bernilai NULL (tidak menunjuk ke Node manapun) dan `false` sebaliknya.
-* **enqueueAntrian(data):** Menambahkan data nasabah baru ke antrian.
-    * Buat Node baru (`newNode`) dan alokasikan memori menggunakan `new`.
-    * Set data nasabah ke `newNode->data`.
-    * Set pointer `next` dari `newNode` ke NULL (karena ini Node terakhir).
-    * Periksa apakah antrian kosong:
-        * Jika kosong (`isEmpty()` bernilai true), set `front` dan `back` sama dengan `newNode`.
-        * Jika tidak kosong, set pointer `next` dari Node terakhir (`back`) ke `newNode` dan update `back` untuk menunjuk ke Node baru tersebut.
-* **dequeueAntrian():** Menghapus data nasabah terdepan dari antrian.
-    * Periksa apakah antrian kosong.
-    * Jika tidak kosong:
-        * Simpan Node terdepan (`front`) ke dalam variable sementara `temp`.
-        * Update `front` untuk menunjuk ke Node berikutnya (`front->next`).
-        * Hapus memory yang dialokasikan untuk `temp` menggunakan `delete temp`.
-        * Periksa apakah antrian menjadi kosong setelah penghapusan (`front == NULL`):
-            * Jika ya, set `back` ke NULL juga (karena tidak ada Node tersisa).
-* **countQueue():** Menghitung jumlah data nasabah yang sedang mengantri.
-    * Inisialisasi variabel `count` menjadi 0.
-    * Set pointer sementara `current` untuk menunjuk ke Node terdepan (`front`).
-    * Loop selama `current` tidak bernilai NULL (menelusuri seluruh linked list):
-        * Tambahkan 1 ke `count`.
-        * Update `current` untuk menunjuk ke Node berikutnya (`current->next`).
-    * Kembalikan nilai `count` yang menunjukkan jumlah Node (data nasabah) dalam antrian.
-* **clearQueue():** Menghapus semua data nasabah dari antrian.
-    * Loop menggunakan `dequeueAntrian()` berulang kali hingga antrian kosong (`front == NULL`).
-* **viewQueue():** Menampilkan data nasabah yang sedang mengantri.
-    * Cetak judul "Data antrian teller".
-    * Set pointer sementara `current` untuk menunjuk ke Node terdepan (`front`).
-    * Inisialisasi variabel `i` menjadi 1 untuk penomoran antrian.
-    * Loop selama `current` tidak bernilai NULL (menelusuri seluruh linked list):
-        * Cetak data nasabah dengan format "[nomor urut]. [nama nasabah]".
-        * Update `current` untuk menunjuk ke Node berikutnya (`current->next`).
-        * Tambahkan 1 ke `i` untuk penomoran urut.
+* isFull(): Tidak digunakan pada linked list karena tidak ada batasan maksimum elemen. Selalu mengembalikan false.
+* isEmpty(): Memeriksa apakah antrian kosong dengan mengembalikan true jika back bernilai NULL dan false sebaliknya.
+* enqueueAntrian(data): Menambahkan data nasabah baru ke antrian.
+    * Alokasikan memori untuk node baru (newNode).
+    * Isi data nasabah (data) dan set pointer next ke NULL (node terakhir).
+    * Jika antrian kosong (isEmpty() bernilai true), set front dan back sama dengan newNode.
+    * Jika tidak kosong, set back->next (pointer next dari node belakang) menjadi newNode dan update back menjadi newNode.
+* dequeueAntrian(): Menghapus data nasabah terdepan dari antrian.
+    * Memeriksa apakah antrian kosong.
+        * Jika kosong, tampilkan pesan "Antrian Kosong".
+    * Jika tidak kosong, simpan node terdepan sementara di temp.
+    * Update front untuk menunjuk ke node selanjutnya.
+    * Hapus memori temp.
+    * Jika front menjadi NULL setelah penghapusan (artinya antrian kosong), update back menjadi NULL juga.
+* countQueue(): Menghitung jumlah data nasabah yang sedang mengantri.
+    * Inisialisasi count menjadi 0.
+    * Loop dengan pointer cur mulai dari front.
+    * Hitung setiap node yang dilewati (count++).
+    * Gerakan cur ke node selanjutnya menggunakan cur->next.
+    * Kembalikan nilai count.
+* clearQueue(): Menghapus semua data nasabah dari antrian.
+    * Memeriksa apakah antrian kosong.
+        * Jika kosong, tampilkan pesan "Antrian Kosong".
+    * Loop menggunakan dequeueAntrian() untuk menghapus elemen antrian sampai kosong.
+* viewQueue(): Menampilkan data nasabah yang sedang mengantri.
+    * Memeriksa apakah antrian kosong.
+        * Jika kosong, tampilkan pesan "Antrian Kosong" dan hentikan fungsi.
+    * Cetak judul "Data Antrian Teller".
+    * Loop dengan pointer cur mulai dari front.
+    * Tampilkan data nasabah dengan format "[nomor urut]. [nama nasabah]".
+    * Gerakan cur ke node selanjutnya menggunakan cur->next.
+    * Tampilkan baris baru setelah loop.
 
 **Fungsi Utama (main):**
 
-* Memasukkan data nasabah "Andi" dan "Maya" ke dalam antrian menggunakan `enqueueAntrian`.
-* Menampilkan data antrian menggunakan `viewQueue`.
-* Menampilkan jumlah antrian menggunakan `countQueue`.
-* Menghapus data nasabah terdepan dari antrian menggunakan `dequeueAntrian`.
-* Menampilkan data antrian dan jumlah antrian setelah penghapusan.
-* Menghapus semua data nasabah dari antrian menggunakan `clearQueue`.
-* Menampilkan data antrian dan jumlah antrian setelah penghapusan semua data (antrian kosong).
+Sama dengan kode sebelumnya, program ini mensimulasikan penggunaan enqueue, dequeue, viewQueue, countQueue, dan clearQueue untuk antrian teller bank.
 
 **Kesimpulan:**
 
-Kodingan ini menggunakan linked list untuk membangun antrian data nasabah. Setiap Node dalam linked list menyimpan data nasabah dan pointer ke Node berikutnya, sehingga membentuk struktur antrian. Fungsi-fungsi yang disediakan memungkinkan operasi dasar untuk mengelola antrian, seperti halnya kode simulasi antrian sebelumnya yang menggunakan array.
+Kode ini menggunakan linked list untuk membuat antrian teller bank yang dinamis (dapat menampung jumlah nasabah yang bervariasi). Fungsi-fungsi yang disediakan memungkinkan operasi dasar untuk mengelola antrian, seperti yang dijelaskan sebelumnya.
 
 
 ### 2. Dari nomor 1 buatlah konsep antri dengan atribut Nama mahasiswa dan NIM Mahasiswa
@@ -477,69 +459,30 @@ int main() {
 
 ![8U2](https://github.com/JeremyMarcello/Assignment-Praktikum-Algoritma-dan-Struktur-Data/assets/156126843/d8432142-6fe8-4aae-951b-5b86eee1d41c)
 
-**Kodingan ini mengimplementasikan antrian (queue) menggunakan linked list untuk mengatur antrian mahasiswa.**
+**Kode ini mengimplementasikan antrian (queue) untuk mengatur antrian mahasiswa menggunakan linked list. Berikut interpretasi detailnya:**
 
 **Struktur Data:**
 
-* **Mahasiswa:** Struktur data untuk menyimpan informasi mahasiswa yang terdiri dari:
-    * **nama:** Variabel string untuk menyimpan nama mahasiswa.
-    * **nim:** Variabel string untuk menyimpan NIM (Nomor Induk Mahasiswa).
-* **Node:** Struktur data yang digunakan untuk membangun linked list.
-    * **data:** Variabel bertipe `Mahasiswa` untuk menyimpan informasi mahasiswa yang sedang mengantri.
-    * **next:** Pointer yang menunjuk ke Node berikutnya dalam linked list.
-* **front:** Pointer yang menunjuk ke Node terdepan (awal) dalam antrian (awalnya NULL).
-* **back:** Pointer yang menunjuk ke Node terbelakang (akhir) dalam antrian (awalnya NULL).
+* mahasiswa: Struktur untuk menyimpan data mahasiswa (nama dan NIM).
+* Node: Struktur untuk menyimpan data mahasiswa (data) dan pointer ke node selanjutnya (next).
+* front: Pointer yang menunjuk ke node terdepan dalam antrian (awalnya NULL).
+* back: Pointer yang menunjuk ke node belakang dalam antrian (awalnya NULL).
 
 **Fungsi:**
 
-* **isEmpty():** Memeriksa apakah antrian kosong dengan mengembalikan `true` jika `front` bernilai NULL (tidak menunjuk ke Node manapun) dan `false` sebaliknya.
-* **enqueueAntrian(data):** Menambahkan data mahasiswa baru ke antrian.
-    * Buat Node baru (`newNode`) dan alokasikan memori menggunakan `new`.
-    * Set data mahasiswa (`Mahasiswa`) ke `newNode->data`.
-    * Set pointer `next` dari `newNode` ke NULL (karena ini Node terakhir).
-    * Periksa apakah antrian kosong:
-        * Jika kosong (`isEmpty()` bernilai true), set `front` dan `back` sama dengan `newNode`.
-        * Jika tidak kosong, set pointer `next` dari Node terakhir (`back`) ke `newNode` dan update `back` untuk menunjuk ke Node baru tersebut.
-* **dequeueAntrian():** Menghapus data mahasiswa terdepan dari antrian.
-    * Periksa apakah antrian kosong.
-    * Jika tidak kosong:
-        * Simpan Node terdepan (`front`) ke dalam variable sementara `temp`.
-        * Update `front` untuk menunjuk ke Node berikutnya (`front->next`).
-        * Hapus memory yang dialokasikan untuk `temp` menggunakan `delete temp`.
-        * Periksa apakah antrian menjadi kosong setelah penghapusan (`front == NULL`):
-            * Jika ya, set `back` ke NULL juga (karena tidak ada Node tersisa).
-* **countQueue():** Menghitung jumlah mahasiswa yang sedang mengantri.
-    * Inisialisasi variabel `count` menjadi 0.
-    * Set pointer sementara `current` untuk menunjuk ke Node terdepan (`front`).
-    * Loop selama `current` tidak bernilai NULL (menelusuri seluruh linked list):
-        * Tambahkan 1 ke `count`.
-        * Update `current` untuk menunjuk ke Node berikutnya (`current->next`).
-    * Kembalikan nilai `count` yang menunjukkan jumlah Node (data mahasiswa) dalam antrian.
-* **clearQueue():** Menghapus semua mahasiswa dari antrian.
-    * Loop menggunakan `dequeueAntrian()` berulang kali hingga antrian kosong (`front == NULL`).
-* **viewQueue():** Menampilkan data mahasiswa yang sedang mengantri.
-    * Cetak judul "Data antrian mahasiswa".
-    * Set pointer sementara `current` untuk menunjuk ke Node terdepan (`front`).
-    * Inisialisasi variabel `i` menjadi 1 untuk penomoran antrian.
-    * Loop selama `current` tidak bernilai NULL (menelusuri seluruh linked list):
-        * Cetak data mahasiswa dengan format "[nomor urut]. Nama: [nama mahasiswa], NIM: [NIM mahasiswa]".
-        * Update `current` untuk menunjuk ke Node berikutnya (`current->next`).
-        * Tambahkan 1 ke `i` untuk penomoran urut.
+Sama seperti kode antrian teller bank sebelumnya, fungsi-fungsi seperti isFull(), isEmpty(), enqueueAntrian(), dequeueAntrian(), countQueue(), clearQueue(), dan viewQueue() memiliki fungsi yang serupa dengan penyesuaian pada tipe data yang disimpan (menggunakan struktur mahasiswa).
+
+* Perbedaan pada enqueueAntrian() dan viewQueue():
+    *enqueueAntrian(): Menerima parameter mahasiswa yang berisi nama dan nim mahasiswa baru.
+    *viewQueue(): Mencetak data mahasiswa dengan format "[nomor urut]. Nama : [nama mahasiswa], NIM : [NIM mahasiswa]".
 
 **Fungsi Utama (main):**
 
-* Buat objek `Mahasiswa` untuk `mhs1` dan `mhs2` dengan data nama dan NIM.
-* Memasukkan data mahasiswa `mhs1` dan `mhs2` ke dalam antrian menggunakan `enqueueAntrian`.
-* Menampilkan data antrian menggunakan `viewQueue`.
-* Menampilkan jumlah mahasiswa dalam antrian menggunakan `countQueue`.
-* Menghapus data mahasiswa terdepan dari antrian menggunakan `dequeueAntrian`.
-* Menampilkan data antrian dan jumlah mahasiswa setelah penghapusan.
-* Menghapus semua mahasiswa dari antrian menggunakan `clearQueue`.
-* Menampilkan data antrian dan jumlah mahasiswa setelah penghapusan semua data (antrian kosong).
+Program ini mensimulasikan penggunaan enqueue, dequeue, viewQueue, dan countQueue untuk antrian mahasiswa.
 
 **Kesimpulan:**
 
-Kodingan ini memodifikasi code antrian sebelumnya untuk menyimpan data mahasiswa. Struktur data `Mahasiswa` dibuat untuk menyimpan informasi nama dan NIM, dan fungsi-fungsi yang berhubungan dengan antrian dimodifikasi untuk menangani data mahasiswa dengan tepat.
+Kode ini memodifikasi kode antrian teller bank sebelumnya untuk  mengelola antrian mahasiswa.  Linked list digunakan untuk membuat antrian yang dinamis dan fungsi-fungsi yang disediakan memungkinkan operasi dasar untuk menambahkan, menghapus, melihat, dan menghitung elemen dalam antrian mahasiswa.
 
 
 ## Kesimpulan
