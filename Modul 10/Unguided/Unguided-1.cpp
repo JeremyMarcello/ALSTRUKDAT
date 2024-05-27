@@ -12,6 +12,6 @@ int main(){
     int angka;
     cout << "Masukkan angka: ";
     cin >> angka;
-    faktorial(angka);
+    cout << "Faktorial dari " << angka << " adalah " << faktorial(angka) << endl;
     return 0;
 }
