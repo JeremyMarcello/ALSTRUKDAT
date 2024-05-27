@@ -5,390 +5,253 @@
 
 ## Dasar Teori
 
-### 1. Pengertian Queue
+**Pengertian Fungsi Rekursif**
 
-Queue heap, atau prioritas baris, adalah struktur data yang mengintegrasikan fungsi dari kedua baris dan baris [1]. Sebuah barisan standar beroperasi pada basis First In, First Out (FIFO), di mana elemen diproses dalam urutan kedatangan mereka [1]. Sebaliknya, tumpukan terstruktur seperti pohon, diatur oleh prioritas sehingga elemen dengan prioritas tertinggi tinggal di bagian atas pohon [1].
+Fungsi rekursif adalah fungsi yang didefinisikan dengan cara memanggil dirinya sendiri [1]. Hal ini memungkinkan fungsi tersebut untuk diulang secara berulang kali untuk menyelesaikan suatu masalah. Fungsi rekursif memiliki dua komponen utama:
 
+* **Kasus Dasar:** Merupakan kondisi yang menandakan bahwa proses rekursi harus dihentikan [1].
+* **Kasus Rekursif:** Merupakan pemanggilan fungsi rekursif itu sendiri dengan parameter yang berbeda [1].
+Cara Kerja Fungsi Rekursif
 
-Dengan menggabungkan kedua konsep ini, sekelompok baris memungkinkan elemen untuk ditambahkan dalam urutan FIFO sambil memastikan bahwa elemen prioritas tertinggi secara konsisten tetap berada di bagian depan baris dan dihapus pertama [1]. Karakteristik ini membuatnya sangat cocok untuk skenario yang membutuhkan pemrosesan prioritas dari elemen, seperti algoritma pencarian atau tugas jadwal [1].
-
-**Implementasi Queue Heaps**
-
-Queue heaps dapat diimplementasikan dalam C++ menggunakan berbagai cara, salah satu yang paling umum adalah dengan menggunakan STL (Standard Template Library) [2]. STL menyediakan kelas `priority_queue` yang dapat digunakan untuk membuat queue heaps [2].
-
-Kelas `priority_queue` menggunakan struktur data heap minimum, di mana elemen dengan nilai terkecil berada di puncak [2]. Untuk mengimplementasikan queue heap, kita dapat menggunakan adaptor std::queue pada kelas `priority_queue` [2].
-
-**Fungsi-fungsi dalam Queue Heaps**
-
-Kelas `priority_queue` menyediakan beberapa fungsi untuk mengelola queue heaps:
-
-* **push(value):** Menambahkan elemen baru ke queue heap [2].
-* **top():** Mengembalikan elemen di puncak queue heap tanpa menghapusnya [2].
-* **pop():** Menghapus elemen di puncak queue heap [2].
-* **empty():** Mengembalikan nilai true jika queue heap kosong, dan false jika tidak [2].
-* **size():** Mengembalikan jumlah elemen dalam queue heap [2].
-
-
+Fungsi rekursif bekerja dengan memecah masalah menjadi sub-masalah yang lebih kecil dan lebih mudah dipecahkan [1]. Sub-masalah ini kemudian dipecahkan dengan cara yang sama dengan masalah utama, yaitu dengan memanggil fungsi rekursif itu sendiri. Proses ini diulang hingga mencapai kasus dasar, di mana fungsi rekursif tidak lagi memanggil dirinya sendiri [1].
 
 ## Guided
 
 ### 1. Guided 1
 ```C++
-#include <iostream>
-#include <algorithm>
+#include <iostream>;
 using namespace std;
 
-int H[50];
-int heapSize = -1;
-
-int parent(int i) {
-    return(i - 1) / 2;
-}
-
-int leftChild(int i) {
-    return ((2 * i) + 1);
-}
-
-int rightChild(int i) {
-    return ((2 * i) + 2);
-}
-
-void shiftUp(int i) {
-    while (i > 0 && H[parent(i)] < H[i]) {
-        swap(H[parent(i)], H[i]);
-        i = parent(i);
+int faktorial(int angka){
+    if (angka <= 1){
+        return 1;
     }
+    return angka * faktorial(angka-1);
 }
 
-void shiftDown(int i) {
-    int maxIndex = i;
-    int l = leftChild(i);
-    if (l <= heapSize && H[l] > H[maxIndex]) {
-        maxIndex = 1;
-    }
-    int r = rightChild(i);
-    if (r <= heapSize && H[r] > H[maxIndex]) {
-        maxIndex = r;
-    }
-    if (i != maxIndex) {
-        swap(H[i], H[maxIndex]);
-        shiftDown(maxIndex);
-    }
-}
-
-void insert(int p) {
-    heapSize = heapSize + 1;
-    H[heapSize] = p;
-    shiftUp(heapSize);
-}
-
-int extractMax() {
-    int result = H[0];
-    H[0] = H[heapSize];
-    heapSize = heapSize - 1;
-    shiftDown(0);
-    return result;
-}
-
-void changerPriority(int i, int p) {
-    int oldp = H[i];
-    H[i] = p;
-    if (p > oldp) {
-        shiftUp(i);
-    } else {
-        shiftDown(i);
-    }
-}
-
-int getMax() {
-    return H[0];
-}
-
-void remove (int i) {
-    H[i] = getMax() + 1;
-    shiftUp(i);
-    extractMax();
-}
-
-int main() {
-    insert(67);
-    insert(26);
-    insert(54);
-    insert(38);
-    insert(19);
-    insert(27);
-    insert(35);
-    insert(41);
-    insert(17);
-    insert(32);
-
-    cout << "Priority Queue : ";
-    for (int i = 0; i <= heapSize; ++i) {
-        cout << H[i] << " ";
-    }
-    cout << "\n";
-
-    cout << "Node With Maximum Priority : " << extractMax() << "\n";
-
-    cout << "Priority Queue After Extracting Maximum : ";
-    for (int i = 0; i <= heapSize; ++i) {
-        cout << H[i] << " ";
-    }
-    cout << "\n";
-
-    changerPriority(5, 47);
-    cout << "Priority Queue After Priority Change : ";
-    for (int i = 0; i <= heapSize; ++i) {
-        cout << H[i] << " ";
-    }
-    cout << "\n";
-
-    remove(5);
-    cout << "Priority Queue After Removing The Element : ";
-    for (int i = 0; i <= heapSize; ++i) {
-        cout << H[i] << " ";
-    }
+int main(){
+    int angka;
+    cout << "Masukkan angka: ";
+    cin >> angka;
+    cout << "Faktorial dari " << angka << " adalah " << faktorial(angka) << endl;
     return 0;
 }
 ```
 
 **Output:**
-![9G1](https://github.com/JeremyMarcello/Assignment-Praktikum-Algoritma-dan-Struktur-Data/assets/156126843/7f94c0e3-78d0-4f49-8313-f529d2e15f09)
+![10G1](https://github.com/JeremyMarcello/Assignment-Praktikum-Algoritma-dan-Struktur-Data/assets/156126843/1a5bfba5-80ae-49f7-b380-ef72d13c6f21)
 
-**Struktur Data:**
-
-* `H:` Array integer dengan ukuran maksimal 50 untuk menyimpan elemen dalam heap.
-* `heapSize:` Variabel integer untuk mencatat jumlah elemen yang ada di heap (dimulai dari -1).
+**Kode yang diberikan mengimplementasikan fungsi rekursif untuk menghitung faktorial dari suatu bilangan.**
 
 **Fungsi:**
 
-* `parent(i):` Mengembalikan indeks induk dari elemen dengan indeks i.
-* `leftChild(i):` Mengembalikan indeks anak kiri dari elemen dengan indeks i.
-* `rightChild(i):` Mengembalikan indeks anak kanan dari elemen dengan indeks i.
-* `shiftUp(i):` Menggeser elemen dengan indeks i ke atas dalam heap untuk menjaga struktur heap.
-* `shiftDown(i):` Menggeser elemen dengan indeks i ke bawah dalam heap untuk menjaga struktur heap.
-* `insert(p):` Memasukkan elemen baru p ke dalam heap.
-* `extractMax():` Menghapus dan mengembalikan elemen dengan prioritas tertinggi (nilai terbesar) dari heap.
-* `changerPriority(i, p):` Mengubah prioritas elemen dengan indeks i menjadi p dan memperbarui struktur heap.
-* `getMax():` Mengembalikan elemen dengan prioritas tertinggi (nilai terbesar) dalam heap tanpa menghapusnya.
-* `remove(i):` Menghapus elemen dengan indeks i dari heap.
+faktorial(angka):
+* Merupakan fungsi rekursif yang menerima parameter angka (integer).
+* Jika angka lebih kecil dari atau sama dengan 1, maka fungsi mengembalikan nilai 1.
+* Jika tidak, fungsi mengembalikan hasil perkalian angka dengan nilai faktorial dari angka-1.
 
 **Fungsi Utama (main):**
 
-* Memasukkan 10 elemen dengan nilai berbeda ke dalam heap.
-* Menampilkan isi heap.
-* Menghapus elemen dengan prioritas tertinggi dan menampilkannya.
-* Menampilkan isi heap setelah penghapusan.
-* Mengubah prioritas elemen di indeks ke-5 menjadi 47 dan menampilkan isi heap.
-* Menghapus elemen di indeks ke-5 dan menampilkan isi heap.
+* Meminta pengguna untuk memasukkan bilangan (integer) melalui konsol.
+* Menyimpan bilangan yang dimasukkan ke dalam variabel angka.
+* Memanggil fungsi faktorial(angka) untuk menghitung faktorial dari bilangan yang dimasukkan.
+* Menampilkan hasil perhitungan faktorial ke konsol.
+
+**Penjelasan:**
+
+Fungsi faktorial(angka) menggunakan teknik rekursif untuk menghitung faktorial suatu bilangan. Rekursif adalah teknik pemrograman di mana sebuah fungsi memanggil dirinya sendiri. Dalam kasus ini, fungsi faktorial(angka) memanggil dirinya sendiri dengan parameter angka-1 untuk menghitung faktorial dari bilangan yang lebih kecil. Hasil dari pemanggilan rekursif ini kemudian dikalikan dengan angka dan dikembalikan sebagai hasil faktorial.
 
 **Kesimpulan:**
 
-Kode ini menunjukkan implementasi heap priority queue yang efektif untuk menyimpan dan mengelola elemen berdasarkan prioritasnya. Fungsi-fungsi yang disediakan memungkinkan operasi dasar seperti penambahan, penghapusan, perubahan prioritas, dan pengambilan elemen dengan prioritas tertinggi dengan efisien.
+Kode ini menunjukkan cara menghitung faktorial suatu bilangan menggunakan fungsi rekursif. Fungsi rekursif dapat digunakan untuk menyelesaikan berbagai masalah pemrograman, terutama yang melibatkan struktur data bertingkat seperti pohon atau grafik.
+
+### 2. Guided 2
+```C++
+#include <iostream>;
+using namespace std;
+
+void functionB(int n);
+
+void functionA(int n) {
+    if (n > 0) {
+        cout << n << " ";
+        functionB(n - 1); // Panggilan rekursif tidak langsung
+    }
+}
+
+void functionB(int n) {
+    if (n > 0) {
+        cout << n << " ";
+        functionA(n / 2); // Panggilan rekursif tidak langsung
+    }
+}
+
+int main() {
+    int num = 5;
+    cout << "Rekursif Tidak Langsung: ";
+    functionA(num);
+    return 0;
+}
+```
+
+**Output:**
+![10G2](https://github.com/JeremyMarcello/Assignment-Praktikum-Algoritma-dan-Struktur-Data/assets/156126843/cde91b57-cd1a-4c63-89c7-1b967c06c269)
+
+**Kode yang diberikan menunjukkan contoh rekursif tidak langsung.**
+
+**Fungsi:**
+
+* **functionA(n):**
+    * Menerima parameter n (integer).
+    * Jika n lebih besar dari 0, maka:
+        * Mencetak nilai n ke konsol.
+        * Memanggil fungsi functionB dengan parameter n-1.
+* functionB(n):
+    * Menerima parameter n (integer).
+    * Jika n lebih besar dari 0, maka:
+        * Mencetak nilai n ke konsol.
+        * Memanggil fungsi functionA dengan parameter n/2.
+
+**Fungsi Utama (main):**
+
+* Mendefinisikan variabel num dan menginisialisasinya dengan nilai 5.
+* Mencetak "Rekursif Tidak Langsung: " ke konsol.
+* Memanggil fungsi functionA(num) dengan parameter num (yaitu 5).
+
+**Penjelasan:**
+
+Dalam kode ini, fungsi functionA dan functionB saling memanggil satu sama lain secara tidak langsung.
+
+* functionA memanggil functionB dengan parameter n-1.
+* functionB memanggil functionA dengan parameter n/2.
+
+Dengan kata lain, functionA memanggil functionB untuk mencetak nilai n dan n-1, kemudian functionB memanggil functionA untuk mencetak nilai n/2 dan n/4. Proses ini berlanjut hingga n menjadi 0.
+
+**Kesimpulan:**
+
+Kode ini menunjukkan contoh rekursif tidak langsung, di mana dua fungsi saling memanggil satu sama lain secara tidak langsung. Rekursif tidak langsung dapat digunakan untuk menyelesaikan berbagai masalah pemrograman, terutama yang melibatkan struktur data bertingkat seperti pohon atau grafik.
 
 ## Unguided
 
 ### 1. Unguided 1
 
 ```C++
-#include <iostream>
-#include <algorithm>
+#include <iostream>;
 using namespace std;
 
-int H[50];
-int heapSize = -1;
-
-int parent(int i) {
-    return(i - 1) / 2;
-}
-
-int leftChild(int i) {
-    return ((2 * i) + 1);
-}
-
-int rightChild(int i) {
-    return ((2 * i) + 2);
-}
-
-void shiftUp(int i) {
-    while (i > 0 && H[parent(i)] < H[i]) {
-        swap(H[parent(i)], H[i]);
-        i = parent(i);
+int faktorial(int angka){
+    if (angka <= 1){
+        return 1;
     }
+    return angka * faktorial(angka-1);
 }
 
-void shiftDown(int i) {
-    int maxIndex = i;
-    int l = leftChild(i);
-    if (l <= heapSize && H[l] > H[maxIndex]) {
-        maxIndex = 1;
-    }
-    int r = rightChild(i);
-    if (r <= heapSize && H[r] > H[maxIndex]) {
-        maxIndex = r;
-    }
-    if (i != maxIndex) {
-        swap(H[i], H[maxIndex]);
-        shiftDown(maxIndex);
-    }
-}
-
-void insert(int p) {
-    heapSize = heapSize + 1;
-    H[heapSize] = p;
-    shiftUp(heapSize);
-}
-
-int extractMax() {
-    int result = H[0];
-    H[0] = H[heapSize];
-    heapSize = heapSize - 1;
-    shiftDown(0);
-    return result;
-}
-
-void changePriority(int i, int p) {
-    int oldp = H[i];
-    H[i] = p;
-    if (p > oldp) {
-        shiftUp(i);
-    } else {
-        shiftDown(i);
-    }
-}
-
-int getMax() {
-    return H[0];
-}
-
-void remove (int i) {
-    H[i] = getMax() + 1;
-    shiftUp(i);
-    extractMax();
-}
-
-void printHeap() {
-    cout << "Heap: ";
-    for (int i = 0; i <= heapSize; ++i) {
-        cout << H[i] << " ";
-    }
-    cout << "\n";
-}
-
-int main() {
-    int choice, value, index;
-    
-    insert(67);
-    insert(26);
-    insert(54);
-    insert(38);
-    insert(19);
-    insert(27);
-    insert(35);
-    insert(41);
-    insert(17);
-    insert(32);
-
-    while (true) {
-        cout << "\nMenu:\n";
-        cout << "1. Insert element\n";
-        cout << "2. Extract max\n";
-        cout << "3. Change priority\n";
-        cout << "4. Remove element\n";
-        cout << "5. Print heap\n";
-        cout << "6. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
-
-        switch (choice) {
-            case 1:
-                cout << "Enter value to insert: ";
-                cin >> value;
-                insert(value);
-                break;
-            case 2:
-                if (heapSize >= 0) {
-                    cout << "Max value extracted: " << extractMax() << "\n";
-                } else {
-                    cout << "Heap is empty!\n";
-                }
-                break;
-            case 3:
-                cout << "Masukkan index: ";
-                cin >> index;
-                cout << "Masukkan nilai: ";
-                cin >> value;
-                if (index >= 0 && index <= heapSize) {
-                    changePriority(index, value);
-                } else {
-                    cout << "Invalid index!\n";
-                }
-                break;
-            case 4:
-                cout << "Enter index to remove: ";
-                cin >> index;
-                if (index >= 0 && index <= heapSize) {
-                    remove(index);
-                } else {
-                    cout << "Invalid index!\n";
-                }
-                break;
-            case 5:
-                printHeap();
-                break;
-            case 6:
-                return 0;
-            default:
-                cout << "Invalid choice!\n";
-                break;
-        }
-    }
+int main(){
+    int angka;
+    cout << "Masukkan angka: ";
+    cin >> angka;
+    cout << "Faktorial dari " << angka << " adalah " << faktorial(angka) << endl;
     return 0;
 }
 ```
 
 #### Output:
-![9U1](https://github.com/JeremyMarcello/Assignment-Praktikum-Algoritma-dan-Struktur-Data/assets/156126843/0b0543d6-5e90-42c7-832e-b71bcb910c6c)
+![10U1](https://github.com/JeremyMarcello/Assignment-Praktikum-Algoritma-dan-Struktur-Data/assets/156126843/ca12a74e-238e-462a-8096-77134612a2d4)
 
-**Struktur Data:**
-
-* `H:` Array integer dengan ukuran maksimal 50 untuk menyimpan elemen dalam heap.
-* `heapSize:` Variabel integer untuk mencatat jumlah elemen yang ada di heap (dimulai dari -1).
+**Kode yang diberikan mengimplementasikan fungsi iteratif untuk menghitung faktorial dari suatu bilangan.**
 
 **Fungsi:**
 
-* `parent(i):` Mengembalikan indeks induk dari elemen dengan indeks i.
-* `leftChild(i):` Mengembalikan indeks anak kiri dari elemen dengan indeks i.
-* `rightChild(i):` Mengembalikan indeks anak kanan dari elemen dengan indeks i.
-* `shiftUp(i):` Menggeser elemen dengan indeks i ke atas dalam heap untuk menjaga struktur heap.
-* `shiftDown(i):` Menggeser elemen dengan indeks i ke bawah dalam heap untuk menjaga struktur heap.
-* `insert(p):` Memasukkan elemen baru p ke dalam heap.
-* `extractMax():` Menghapus dan mengembalikan elemen dengan prioritas tertinggi (nilai terbesar) dari heap.
-* `changerPriority(i, p):` Mengubah prioritas elemen dengan indeks i menjadi p dan memperbarui struktur heap.
-* `getMax():` Mengembalikan elemen dengan prioritas tertinggi (nilai terbesar) dalam heap tanpa menghapusnya.
-* `remove(i):` Menghapus elemen dengan indeks i dari heap.
-* `printHeap():` Mencetak isi heap ke konsol.
+*  faktorial(angka):
+    * Menerima parameter angka (integer).
+    * Mendefinisikan variabel hasil dan menginisialisasinya dengan nilai 1.
+    * Melakukan loop for dari 2 hingga angka.
+    * Di dalam loop, hasil dikalikan dengan nilai i.
+    * Mengembalikan nilai hasil setelah loop selesai.
 
 **Fungsi Utama (main):**
 
-* Memasukkan 10 elemen dengan nilai berbeda ke dalam heap.
-* Menampilkan menu interaktif yang memungkinkan pengguna melakukan berbagai operasi pada heap.
-* Memasukkan elemen baru.
-* Menghapus elemen dengan prioritas tertinggi.
-* Mengubah prioritas elemen.
-* Menghapus elemen berdasarkan indeks.
-* Mencetak isi heap.
-* Keluar dari program.
-* Berdasarkan pilihan pengguna, program akan menjalankan fungsi yang sesuai.
-* Memvalidasi input pengguna untuk indeks dan nilai.
+* Meminta pengguna untuk memasukkan bilangan (integer) melalui konsol.
+* Menyimpan bilangan yang dimasukkan ke dalam variabel angka.
+* Memanggil fungsi faktorial(angka) untuk menghitung faktorial dari bilangan yang dimasukkan.
+* Menampilkan hasil perhitungan faktorial ke konsol.
+
+**Penjelasan:**
+
+Fungsi faktorial(angka) menggunakan teknik iteratif untuk menghitung faktorial suatu bilangan. Iteratif adalah teknik pemrograman di mana sebuah fungsi menyelesaikan perhitungan dengan melakukan langkah-langkah berulang. Dalam kasus ini, fungsi faktorial(angka) melakukan loop dari 2 hingga angka dan mengalikan nilai hasil dengan nilai i di setiap iterasi.
 
 **Kesimpulan:**
 
-Kode ini menyediakan implementasi heap priority queue yang interaktif. Pengguna dapat dengan mudah melakukan berbagai operasi pada heap dan memantau kondisinya melalui menu yang disediakan.
+Kode ini menunjukkan cara menghitung faktorial suatu bilangan menggunakan fungsi iteratif. Fungsi iteratif dapat menjadi alternatif yang lebih efisien untuk menghitung faktorial bilangan besar dibandingkan dengan fungsi rekursif.
+
+### 2. Unguided 2
+
+```C++
+#include <iostream>;
+using namespace std;
+
+int faktorialA(int angka);
+int faktorialB(int angka);
+
+int faktorialA(int angka){
+    if (angka <= 1){
+        return 1;
+    }
+    return angka * faktorialB(angka-1);
+}
+
+int faktorialB(int angka){
+    if (angka <= 1){
+        return 1;
+    }
+    return angka * faktorialA(angka-1);
+}
+
+int main(){
+    int angka;
+    cout << "Masukkan angka: ";
+    cin >> angka;
+    cout << "Faktorial dari " << angka << " adalah " << faktorialA(angka) << endl;
+    return 0;
+}
+```
+
+#### Output:
+![10U2](https://github.com/JeremyMarcello/Assignment-Praktikum-Algoritma-dan-Struktur-Data/assets/156126843/42f3e864-8578-4beb-ae62-4ad6a3f7dca7)
+
+**Kode yang diberikan mengimplementasikan fungsi rekursif timbal balik untuk menghitung faktorial dari suatu bilangan.**
+
+**Fungsi:**
+
+* faktorialA(angka) dan faktorialB(angka):
+    * Kedua fungsi ini memiliki definisi yang sama.
+    * Menerima parameter angka (integer).
+    * Jika angka lebih kecil dari atau sama dengan 1, maka:
+        * Mengembalikan nilai 1.
+    * Jika tidak, maka:
+        * Mengembalikan hasil perkalian angka dengan nilai faktorial dari angka-1.
+        * Perbedaannya terletak pada fungsi mana yang dipanggil untuk menghitung nilai faktorial angka-1.
+    * faktorialA(angka) memanggil faktorialB(angka-1).
+    * faktorialB(angka) memanggil faktorialA(angka-1).
+
+**Fungsi Utama (main):**
+
+* Meminta pengguna untuk memasukkan bilangan (integer) melalui konsol.
+* Menyimpan bilangan yang dimasukkan ke dalam variabel angka.
+* Memanggil fungsi faktorial(angka) untuk menghitung faktorial dari bilangan yang dimasukkan.
+* Menampilkan hasil perhitungan faktorial ke konsol.
+
+
+**Penjelasan:**
+
+Kode ini menggunakan dua fungsi rekursif timbal balik untuk menghitung faktorial. Rekursif timbal balik adalah jenis rekursif di mana dua fungsi saling memanggil satu sama lain untuk menyelesaikan suatu masalah. Dalam kasus ini, faktorialA(angka) dan faktorialB(angka) saling memanggil satu sama lain untuk menghitung faktorial dari angka-1.
+
+**Kesimpulan:**
+
+Kode ini menunjukkan cara menghitung faktorial suatu bilangan menggunakan fungsi rekursif timbal balik. Rekursif timbal balik dapat digunakan untuk menyelesaikan berbagai masalah pemrograman yang melibatkan struktur data bertingkat seperti pohon atau grafik.
 
 ## Kesimpulan
-Kelurahan mengintegrasikan fungsionalitas kedua kelurahan dan keluraha, memungkinkan untuk mendapatkan elemen berdasarkan prioritas tertinggi pertama. Struktur data ini terbukti lebih efisien daripada barisan tradisional untuk operasi tertentu dan ideal untuk aplikasi di mana urutan dan prioritas elemen sangat penting. Implementasi penting termasuk 'priority_queue' di Perpustakaan Standar C++ (STL) dan 'heapq' di Python. Kelurahan menemukan aplikasi serbaguna, seperti perencanaan tugas, routing jaringan, algoritma pencarian, simulasi, dan sistem real-time.
+Fungsi rekursif adalah teknik pemrograman di mana sebuah fungsi memanggil dirinya sendiri untuk menyelesaikan suatu masalah. Fungsi rekursif dapat digunakan untuk menyelesaikan berbagai masalah, termasuk menghitung faktorial, deret Fibonacci, dan traversal pohon. Rekursif tidak langsung dan rekursif timbal balik merupakan dua jenis rekursif yang sering digunakan. 
 
 ## Referensi
-
-[1] Goodrich, M. T., Tamassia, R., & Goldwasser, M. H. (2021). Data Structures and Algorithms in C++. Upper Saddle River, NJ: Pearson.
+[1] Akhmad Arief (2020)."Pemrograman Python: Dari Pemula Menjadi Mahir".
